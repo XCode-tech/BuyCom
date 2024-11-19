@@ -193,6 +193,7 @@ export default function AdminDashboard() {
                 id: editingId,
                 gstin: selectedItem.gstin,
                 status: newStatus || selectedItem.result,
+                // annual_turnover: newAnnualTurnover || String(selectedItem.annual_turnover),
                 annual_turnover: newAnnualTurnover ? parseFloat(newAnnualTurnover) : selectedItem.annual_turnover,
             };
 
@@ -205,6 +206,8 @@ export default function AdminDashboard() {
                     body: JSON.stringify(bodyData),
                 });
 
+                console.log("bodyData : ", bodyData);
+                
                 if (response.ok) {
                     console.log("Record updated successfully");
                     await fetchData();
@@ -399,7 +402,9 @@ export default function AdminDashboard() {
                                                         <Input
                                                             id="annual_turnover"
                                                             className="col-span-3"
-                                                            defaultValue={item.annual_turnover?.toString()}
+                                                            type="number"
+                                                            defaultValue={item.annual_turnover?.number()}
+                                                            // defaultValue={item.annual_turnover ? parseFloat(item.annual_turnover) : ""}
                                                             onChange={(e) => handleAnnualTurnoverChange(e.target.value)}
                                                         />
                                                     </div>

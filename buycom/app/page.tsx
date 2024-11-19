@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
@@ -10,7 +10,12 @@ export default function LoginPage() {
   const [isAdminLogin, setIsAdminLogin] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isClient, setIsClient] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +30,7 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
           'Authorization': `Basic ${encodedCredentials}`,
         },
-        body: JSON.stringify({ username, password, loginAsAdmin: isAdminLogin }), // Indicate if admin login
+        body: JSON.stringify({ username, password, loginAsAdmin: isAdminLogin }),
       });
   
       const data = await response.json();
@@ -33,20 +38,16 @@ export default function LoginPage() {
       if (response.ok) {
         localStorage.setItem('auth_tokens', data.token);
         localStorage.setItem('user_role', data.role);
-        // const gettoken=localStorage.getItem("auth_token")
-        const getrole=localStorage.getItem("user_role")
+        const getrole = localStorage.getItem("user_role")
   
         if (data.role === 'admin') {
-          // If admin, allow access to admin and user dashboards
-          if (isAdminLogin && getrole==="admin" ) {
-            router.push('/admin'); // Redirect to admin dashboard if on admin panel
+          if (isAdminLogin && getrole === "admin") {
+            router.push('/admin');
           } else {
-            router.push('/user'); // Redirect to user dashboard if on user panel
+            router.push('/user');
           }
           console.log("data : ", data);
-          
         } else {
-          // Redirect user to their dashboard
           router.push('/user');
         }
       } else {
@@ -57,6 +58,10 @@ export default function LoginPage() {
       alert('An error occurred. Please try again later.');
     }
   };
+
+  if (!isClient) {
+    return null; // or a loading spinner
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

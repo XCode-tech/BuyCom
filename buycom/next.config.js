@@ -3,6 +3,8 @@ const nextConfig = {
     images: {
         domains: ['127.0.0.1', 'localhost', 'test.trainomart.com'], // Add both '127.0.0.1' and 'localhost'
     },
+    reactStrictMode: true,
+    // swcMinify: true,
 }
 
 module.exports = nextConfig
