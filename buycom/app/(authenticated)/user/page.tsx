@@ -66,7 +66,7 @@ export default function UserDashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/companies/')
+                const response = await fetch(`${API_URL}/companies/`)
                 const data: Company[] = await response.json()
 
                 const uniqueData: Company[] = Array.from(new Map(data.map(item => [item.gstin, item])).values())

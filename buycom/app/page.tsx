@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import API_URL from '@/config'
 
 export default function LoginPage() {
   const [isAdminLogin, setIsAdminLogin] = useState(false)
@@ -24,7 +25,7 @@ export default function LoginPage() {
     const encodedCredentials = btoa(`${username}:${password}`);
   
     try {
-      const response = await fetch('http://localhost:8000/api/login/', {
+      const response = await fetch(`${API_URL}/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/pagination"
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import API_URL from '@/config'
 
 import { UserOptions as AutoTableUserOptions } from 'jspdf-autotable'
 
@@ -131,7 +132,7 @@ export default function AdminDashboard() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/companies/')
+            const response = await fetch(`${API_URL}/companies/`)
             if (response.ok) {
                 const data = await response.json()
                 if (Array.isArray(data)) {
@@ -153,7 +154,7 @@ export default function AdminDashboard() {
         e.preventDefault()
 
         try {
-            const response = await fetch('http://localhost:8000/api/fetch_and_save_gst_record/', {
+            const response = await fetch(`${API_URL}/fetch_and_save_gst_record/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -198,7 +199,7 @@ export default function AdminDashboard() {
             };
 
             try {
-                const response = await fetch('http://localhost:8000/api/update_gst_record/', {
+                const response = await fetch(`${API_URL}/update_gst_record/`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
