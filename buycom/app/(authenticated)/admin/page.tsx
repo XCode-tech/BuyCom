@@ -81,7 +81,7 @@ export default function AdminDashboard() {
     const [newStatus, setNewStatus] = useState<string>('')
     const [newAnnualTurnover, setNewAnnualTurnover] = useState<string>('')
     const [currentPage, setCurrentPage] = useState(1)
-    const [itemsPerPage] = useState(10)
+    const [itemsPerPage] = useState(5)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
     const router = useRouter()
