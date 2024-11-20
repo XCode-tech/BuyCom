@@ -411,7 +411,6 @@ export default function AdminDashboard() {
                                                     </div>
                                                 </div>
                                                 <div className="flex justify-end space-x-4">
-                                                    <Button onClick={() => setEditingId(null)} variant="outline">Cancel</Button>
                                                     <Button onClick={handleSaveChanges}>Save Changes</Button>
                                                 </div>
                                             </DialogContent>
